@@ -190,6 +190,12 @@ export default {
       );
       this.ctx.stroke();
       this.ctx.fill();
+      const today = new Date();
+      const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+      const time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      const dateTime = date +' '+ time;
+      this.timestamp = dateTime;
+      console.log(this.timestamp)
 
       // set relation between eyes and circle x y
       if (!this.isStop) {
@@ -201,6 +207,7 @@ export default {
             left_iris_y: this.predictions[0].scaledMesh[468]["1"],
             right_iris_x: this.predictions[0].scaledMesh[473]["0"],
             right_iris_y: this.predictions[0].scaledMesh[473]["1"],
+            timestamp: this.timestamp,
           });
         }
       }
