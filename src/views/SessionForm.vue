@@ -90,6 +90,12 @@ export default {
       isFormValid: true,
     };
   },
+  async create(){
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  destroyed(){
+    window.removeEventListener("scroll", this.handleScroll);
+  },
   methods: {
     setCurrentSession() {
       if (this.$refs.form.validate()) {
@@ -105,5 +111,8 @@ export default {
       }
     },
   },
+  handleScroll(event) {
+      console.log(window.scrollY);
+    },
 };
 </script>

@@ -13,12 +13,14 @@
     "@tensorflow/tfjs-backend-wasm": "^3.10.0",
     "@tensorflow/tfjs-converter": "^3.10.0",
     "@tensorflow/tfjs-core": "^3.10.0",
+    "@vueuse/core": "^10.5.0",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "firebase": "^8.6.3",
     "heatmap.js": "^2.0.5",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
+    "vue-use-web": "^1.0.1",
     "vuetify": "^2.4.0",
     "vuex": "^3.4.0"
   },
@@ -49,7 +51,9 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {
+      "no-unused-vars": "off"
+    }
   },
   "browserslist": [
     "> 1%",

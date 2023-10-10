@@ -37,6 +37,7 @@ export default {
     Toolbar,
     SessionsTable,
   },
+  
   data() {
     return {
       loading: false
@@ -51,6 +52,15 @@ export default {
     this.loading = true
     await this.$store.dispatch('getUserSessions', this.$store.state.auth.user.uid)
     this.loading = false
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
+  methods: {
+    handleScroll(event) {
+      console.log(window.scrollY);
+    },
   }
 };
 </script>

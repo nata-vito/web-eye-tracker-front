@@ -111,12 +111,22 @@ export default {
       deep: true,
     },
   },
+  
   computed: {
     currentSession() {
       return this.$store.state.session.currentSession;
     },
   },
   methods: {
+    async create(){
+      window.addEventListener("scroll", this.handleScroll);
+    },
+    destroyed(){
+      window.removeEventListener("scroll", this.handleScroll);
+    },
+    handleScroll(event) {
+      console.log(window.scrollY);
+    },
     async sendToAPI(consent) {
       if (consent) {
         this.saving = true;
