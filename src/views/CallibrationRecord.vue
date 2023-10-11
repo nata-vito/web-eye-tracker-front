@@ -56,9 +56,15 @@ export default {
     },
   },
   mounted() {
-    this.startCallib();
+    window.addEventListener("scroll", this.onScroll)
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.onScroll)
   },
   methods: {
+    onScroll(){
+      console.log(window.scrollY);
+    },
     startCallib() {
       this.generateCallibPoints();
       this.startWebCamCapture();
@@ -68,17 +74,15 @@ export default {
     startMouseEventCapture() {
       const th = this;
       onmousemove = function(event) {
-        if (!this.isStop) {
-          if (th.predictions[0]) {
-            th.mouseIrisPoints.push({
-              mouse_x: event.clientX,
-              mouse_y: event.clientY,
-              left_iris_x: th.predictions[0].scaledMesh[468]["0"],
-              left_iris_y: th.predictions[0].scaledMesh[468]["1"],
-              right_iris_x: th.predictions[0].scaledMesh[473]["0"],
-              right_iris_y: th.predictions[0].scaledMesh[473]["1"],
-            });
-          }
+        if (!this.isStop && th.predictions[0]) {
+          th.mouseIrisPoints.push({
+            mouse_x: event.clientX,
+            mouse_y: event.clientY,
+            left_iris_x: th.predictions[0].scaledMesh[468]["0"],
+            left_iris_y: th.predictions[0].scaledMesh[468]["1"],
+            right_iris_x: th.predictions[0].scaledMesh[473]["0"],
+            right_iris_y: th.predictions[0].scaledMesh[473]["1"],
+          });
         }
       };
     },

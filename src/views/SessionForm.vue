@@ -90,13 +90,19 @@ export default {
       isFormValid: true,
     };
   },
-  async create(){
+  mounted() {
     window.addEventListener("scroll", this.handleScroll);
   },
-  destroyed(){
+  destroyed() {
     window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
+    handleScroll() {
+      const scrollY = window.scrollY;
+      const scrollX = window.scrollX
+      console.log("Posição do scroll em Y:", scrollY);
+      console.log("Posição do scroll em X:", scrollX);
+    },
     setCurrentSession() {
       if (this.$refs.form.validate()) {
         this.$store.commit("setCurrentSession", {
@@ -111,8 +117,5 @@ export default {
       }
     },
   },
-  handleScroll(event) {
-      console.log(window.scrollY);
-    },
 };
 </script>

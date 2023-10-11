@@ -42,10 +42,18 @@
         <h2 class="ml-4">Saving Session...</h2>
       </v-row>
     </v-overlay>
-    <iframe
-      :src="currentSession.website_url"
-      style="border: 0; width: 100%; height: 93%"
-    />
+    <!-- 
+      TO DO
+      -> Method to get data from iframe here
+    
+    -->
+      <iframe
+        id="myIframe"
+        :src="currentSession.website_url"
+        className="custom-iframe"
+        style="border: 0; width: 100%; height: 93%"
+        onload="onLoad()" onerror="onError()"
+      />
     <video autoplay id="video-tag" style="display: none"></video>
     <!-- Confirm Send Dialog -->
     <dialog-confirm-send
@@ -101,6 +109,7 @@ export default {
       irisPoints: [],
       predictions: [],
       isStop: false,
+      myIframe: null,
     };
   },
   watch: {
@@ -111,21 +120,17 @@ export default {
       deep: true,
     },
   },
-  
   computed: {
     currentSession() {
       return this.$store.state.session.currentSession;
     },
   },
   methods: {
-    async create(){
-      window.addEventListener("scroll", this.handleScroll);
+    onLoad(event){
+      console.log('Iframe carregado com sucesso!');
     },
-    destroyed(){
-      window.removeEventListener("scroll", this.handleScroll);
-    },
-    handleScroll(event) {
-      console.log(window.scrollY);
+    onError(event){
+      console.log('Iframe carregado com sucesso!');
     },
     async sendToAPI(consent) {
       if (consent) {
@@ -234,6 +239,9 @@ export default {
           this.recordScreen = new MediaRecorder(captureStream, {
             mimeType: "video/webm; codecs=vp9",
           });
+          
+          
+          
           let recordingScreen = [];
 
           // Define screen capture events

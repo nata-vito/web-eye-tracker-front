@@ -74,6 +74,12 @@ export default {
       webcamStream: null
     };
   },
+  async created() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
   watch: {
     predictions: {
       handler() {
@@ -83,6 +89,9 @@ export default {
     },
   },
   methods: {
+    handleScroll(event) {
+      console.log(window.scrollX, window.scrollY);
+    },
     goToCallibRecord() {
         this.webcamStream.getTracks().forEach((track) => {
           track.stop()
